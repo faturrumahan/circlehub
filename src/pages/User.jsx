@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 import UserCard from "../components/UserCard";
+import UserCardSkeleton from "../components/UserCardSkeleton";
 
 const User = () => {
   const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading((prevLoading) => {
-      !prevLoading;
-    });
     fetch("https://dummyjson.com/users?limit=0")
       .then((response) => response.json())
-      .then((data) => setUsers(data.users));
-    setIsLoading((prevLoading) => {
-      !prevLoading;
-    });
+      .then((data) => setUsers(data.users))
+      .then(
+        setIsLoading((prevLoading) => {
+          !prevLoading;
+        }),
+      );
   }, []);
 
   return (
@@ -28,7 +28,9 @@ const User = () => {
           ))}
         </div>
       ) : (
-        <p className="text-center">loading</p>
+        <div className="grid grid-cols-4 gap-2 lg:grid-cols-5">
+          <UserCardSkeleton cards={20} />
+        </div>
       )}
     </>
   );
