@@ -1,3 +1,4 @@
+import { SkeletonTheme } from "react-loading-skeleton";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Authentication, { action as authAction } from "./pages/Authentication";
 import { action as logoutAction } from "./pages/Logout";
@@ -62,7 +63,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <SkeletonTheme baseColor="#202020" highlightColor="#444">
+        <RouterProvider router={router} />;
+      </SkeletonTheme>
+    </>
+  );
 }
 
 export default App;

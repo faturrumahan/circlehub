@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import PostCard from "../components/PostCard";
+import PostCardSkeleton from "../components/PostCardSkeleton";
 import { useFetch } from "../hooks/useFetch";
 import { fetchPosts } from "../http";
-import { url } from "../URL";
 
 const Home = () => {
   const { isFetching, error, fetchedData } = useFetch(fetchPosts);
@@ -11,7 +11,6 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [limit] = useState(10);
   const [skip, setSkip] = useState(10);
-  const testUrl = `${url}/posts?limit=${limit}&skip=${skip}`;
 
   useEffect(() => {
     fetch("https://dummyjson.com/users?limit=0")
@@ -51,12 +50,15 @@ const Home = () => {
   // };
   return (
     <>
-      {!loading &&
+      {!loading ? (
         combinedArray.map((item, index) => (
           <div key={index}>
             <PostCard post={item} user={item} />
           </div>
-        ))}
+        ))
+      ) : (
+        <PostCardSkeleton cards={5} />
+      )}
       {/* <button onClick={handleLoadMore}>load more</button> */}
     </>
   );
