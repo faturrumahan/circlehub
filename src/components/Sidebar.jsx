@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Sidebar = ({ id }) => {
   return (
@@ -12,22 +12,18 @@ const Sidebar = ({ id }) => {
         <div className="h-full overflow-y-auto px-3 py-2 lg:py-4">
           <ul className="flex justify-center space-x-5 lg:flex-col lg:space-x-0 lg:space-y-2">
             <li className="hidden lg:block">
-              <a
-                href="https://flowbite.com/"
+              <Link
+                to="/"
                 className="my-2 flex items-center justify-center ps-2.5 lg:my-0 lg:mb-2 lg:justify-start"
               >
-                <img
-                  src="https://flowbite.com/docs/images/logo.svg"
-                  className="me-3 h-6 sm:h-7"
-                  alt="Flowbite Logo"
-                />
+                <div className="mr-2 h-8 w-8 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"></div>
                 <span className="self-center whitespace-nowrap text-xl font-semibold text-white">
                   Circle
                   <span className="ms-1 rounded-md bg-orange-400 p-1 text-black">
                     Hub
                   </span>
                 </span>
-              </a>
+              </Link>
             </li>
             <li>
               <NavLink

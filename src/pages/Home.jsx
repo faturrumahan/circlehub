@@ -9,8 +9,6 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [limit] = useState(10);
-  const [skip, setSkip] = useState(10);
 
   useEffect(() => {
     fetch("https://dummyjson.com/users?limit=0")
@@ -31,23 +29,6 @@ const Home = () => {
     return { ...item1, ...restItem2 };
   });
 
-  // const fetchData = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await fetch(testUrl);
-  //     const newData = await response.json();
-  //     setSkip((prevSkip) => prevSkip + limit);
-  //     setData((prevData) => [...prevData, ...newData.posts]);
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // const handleLoadMore = () => {
-  //   fetchData();
-  // };
   return (
     <>
       {!loading ? (
@@ -59,7 +40,6 @@ const Home = () => {
       ) : (
         <PostCardSkeleton cards={5} />
       )}
-      {/* <button onClick={handleLoadMore}>load more</button> */}
     </>
   );
 };

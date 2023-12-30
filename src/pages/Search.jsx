@@ -126,8 +126,16 @@ const Search = () => {
           )}
         </>
       ) : (
-        <div className="flex h-screen items-center justify-center text-center text-3xl font-bold">
-          Search Something
+        <div className="flex h-full items-center justify-center overflow-hidden text-center text-3xl font-bold">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/jXcFxpQ93CM?si=pt-YhZpezSipz8lZ&amp;controls=0"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
         </div>
       )}
     </>

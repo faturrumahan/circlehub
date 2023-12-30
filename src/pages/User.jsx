@@ -1,21 +1,18 @@
 import { useState, useEffect } from "react";
+import { useFetch } from "../hooks/useFetch";
+import { fetchUsers } from "../http";
 import UserCard from "../components/UserCard";
 import UserCardSkeleton from "../components/UserCardSkeleton";
 
 const User = () => {
+  const { isFetching, error, fetchedData } = useFetch(fetchUsers);
   const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/users?limit=0")
-      .then((response) => response.json())
-      .then((data) => setUsers(data.users))
-      .then(
-        setIsLoading((prevLoading) => {
-          !prevLoading;
-        }),
-      );
-  }, []);
+    setIsLoading(isFetching);
+    setUsers(fetchedData);
+  }, [fetchedData, isFetching]);
 
   return (
     <>
@@ -29,7 +26,7 @@ const User = () => {
         </div>
       ) : (
         <div className="grid grid-cols-4 gap-2 lg:grid-cols-5">
-          <UserCardSkeleton cards={20} />
+          <UserCardSkeleton cards={45} />
         </div>
       )}
     </>
