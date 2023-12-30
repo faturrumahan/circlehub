@@ -12,6 +12,7 @@ const UserProfile = () => {
   const [userPosts, setUserPosts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [profileLoading, setProfileLoading] = useState(true);
+  const [count, setCount] = useState(0);
   const title = useRef();
   const body = useRef();
 
@@ -28,6 +29,10 @@ const UserProfile = () => {
       .then((data) => setUserPosts(data.posts))
       .then(setIsLoading(false));
   }, [userId]);
+
+  const countWord = () => {
+    setCount(body.current.value.length);
+  };
 
   const postSubmitHandler = async (event) => {
     event.preventDefault();
@@ -181,6 +186,7 @@ const UserProfile = () => {
               name="title"
               placeholder="Your Story Title"
               ref={title}
+              required
             ></input>
           </div>
           <hr className="border-px border-slate-500"></hr>
@@ -191,9 +197,18 @@ const UserProfile = () => {
               name="body"
               placeholder="Tell us something about your story"
               ref={body}
+              onChange={countWord}
+              required
             ></textarea>
           </div>
-          <div className="flex w-full justify-end">
+          <p
+            className={`flex w-full justify-end text-xs ${
+              count >= 500 && `text-red-500`
+            }`}
+          >
+            {count}/500
+          </p>
+          <div className="mt-2 flex w-full justify-end">
             <button className="w-fit rounded-full bg-blue-500 px-5 py-2 font-bold hover:bg-blue-600">
               Post
             </button>

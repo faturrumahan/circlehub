@@ -9,6 +9,7 @@ import RootLayout from "./pages/RootLayout";
 import User from "./pages/User";
 import { tokenLoader, idLoader, checkAuthLoader } from "./util/auth";
 import UserProfile from "./pages/UserProfile";
+import Register, { action as registAction } from "./pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -50,10 +51,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/auth",
-    element: <Authentication />,
     id: "isAuth",
     loader: tokenLoader,
-    action: authAction,
+    children: [
+      { path: "/auth", element: <Authentication />, action: authAction },
+      { path: "/auth/register", element: <Register />, action: registAction },
+    ],
   },
   {
     path: "/logout",
@@ -66,7 +69,7 @@ function App() {
   return (
     <>
       <SkeletonTheme baseColor="#202020" highlightColor="#444">
-        <RouterProvider router={router} />;
+        <RouterProvider router={router} />
       </SkeletonTheme>
     </>
   );

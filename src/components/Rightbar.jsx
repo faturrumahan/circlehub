@@ -65,12 +65,12 @@ const Rightbar = ({ id }) => {
             Want to explore more? Join our membership now
           </h3>
           <div className="grid grid-cols-2 gap-2 p-2 lg:mt-3 lg:p-0">
-            <button
+            <Link
               className="h-fit w-full rounded-md bg-blue-600 px-5 py-2 text-center hover:bg-blue-700 lg:rounded-full"
-              disabled
+              to="/auth/register"
             >
               Register
-            </button>
+            </Link>
             <Link
               className="h-fit w-full rounded-md bg-blue-600 px-5 py-2 text-center hover:bg-blue-700 lg:rounded-full"
               to="/auth"
