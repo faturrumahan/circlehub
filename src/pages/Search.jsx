@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import PostCard from "../components/PostCard";
+import PostCardSkeleton from "../components/PostCardSkeleton";
 import UserCard from "../components/UserCard";
 
 const Search = () => {
@@ -8,6 +9,7 @@ const Search = () => {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("https://dummyjson.com/users?limit=0")
@@ -27,18 +29,20 @@ const Search = () => {
         `https://dummyjson.com/users/search?q=${keyword}`,
       );
       if (postResponse.ok || userResponse.ok) {
-        if (postResponse.ok) {
-          const data = await postResponse.json();
-          setPosts(data.posts);
-        }
         if (userResponse.ok) {
           const data = await userResponse.json();
           setUsers(data.users);
         }
+        if (postResponse.ok) {
+          const data = await postResponse.json();
+          setPosts(data.posts);
+        }
       } else {
         alert("Some error occured");
       }
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       alert(error);
     }
   };
@@ -87,7 +91,63 @@ const Search = () => {
           </button>
         </div>
       </form>
-      {keyword ? (
+      {console.log(isLoading)}
+      {keyword === undefined && (
+        <div className="flex h-full items-center justify-center overflow-hidden text-center text-3xl font-bold">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/jXcFxpQ93CM?si=pt-YhZpezSipz8lZ&amp;controls=0"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+      )}
+      {isLoading && keyword && (
+        <div className="mt-3">
+          <PostCardSkeleton cards={4} />
+        </div>
+      )}
+      {!isLoading && (
+        <>
+          {users.length > 0 && (
+            <>
+              <div className="my-3">
+                <h2 className="text-2xl font-bold">User :</h2>
+                <hr className="h-px border-0 bg-gray-700"></hr>
+              </div>
+              <div className="grid grid-cols-4 gap-2 lg:grid-cols-5">
+                {users.map((user) => (
+                  <div key={user.username}>
+                    <UserCard user={user} />
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+          {combinedArray.length > 0 && (
+            <>
+              <div className="my-3">
+                <h2 className="text-2xl font-bold">Post :</h2>
+                <hr className="h-px border-0 bg-gray-700"></hr>
+              </div>
+              {combinedArray.map((post) => (
+                <div key={post.title}>
+                  <PostCard post={post} user={post} />
+                </div>
+              ))}
+            </>
+          )}
+        </>
+      )}
+      {!isLoading && combinedArray.length == 0 && users.length == 0 && (
+        <div className="flex h-screen items-center justify-center text-center text-3xl font-bold">
+          cannot found something interesting
+        </div>
+      )}
+      {/* {keyword ? (
         <>
           {users.length > 0 && (
             <>
@@ -137,7 +197,7 @@ const Search = () => {
             allowfullscreen
           ></iframe>
         </div>
-      )}
+      )} */}
     </>
   );
 };
