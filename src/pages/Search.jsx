@@ -91,7 +91,6 @@ const Search = () => {
           </button>
         </div>
       </form>
-      {console.log(isLoading)}
       {keyword === undefined && (
         <div className="flex h-full items-center justify-center overflow-hidden text-center text-3xl font-bold">
           <iframe
@@ -147,57 +146,6 @@ const Search = () => {
           cannot found something interesting
         </div>
       )}
-      {/* {keyword ? (
-        <>
-          {users.length > 0 && (
-            <>
-              <div className="my-3">
-                <h2 className="text-2xl font-bold">User :</h2>
-                <hr className="h-px border-0 bg-gray-700"></hr>
-              </div>
-              <div className="grid grid-cols-4 gap-2 lg:grid-cols-5">
-                {users.map((user) => (
-                  <div key={user.username}>
-                    <UserCard user={user} />
-                  </div>
-                ))}
-              </div>
-            </>
-          )}
-          {combinedArray.length > 0 && (
-            <>
-              <div className="my-3">
-                <h2 className="text-2xl font-bold">Post :</h2>
-                <hr className="h-px border-0 bg-gray-700"></hr>
-              </div>
-              {combinedArray.map((post) => (
-                <div key={post.title}>
-                  <PostCard post={post} user={post} />
-                </div>
-              ))}
-            </>
-          )}
-          {combinedArray.length == 0 && users.length == 0 ? (
-            <div className="flex h-screen items-center justify-center text-center text-3xl font-bold">
-              cannot found something interesting
-            </div>
-          ) : (
-            ""
-          )}
-        </>
-      ) : (
-        <div className="flex h-full items-center justify-center overflow-hidden text-center text-3xl font-bold">
-          <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/jXcFxpQ93CM?si=pt-YhZpezSipz8lZ&amp;controls=0"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
-        </div>
-      )} */}
     </>
   );
 };
