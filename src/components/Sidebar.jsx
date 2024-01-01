@@ -16,7 +16,8 @@ const Sidebar = ({ id }) => {
                 to="/"
                 className="my-2 flex items-center justify-center ps-2.5 lg:my-0 lg:mb-2 lg:justify-start"
               >
-                <div className="mr-2 h-8 w-8 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"></div>
+                {/* <div className="mr-2 h-8 w-8 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500"></div> */}
+                <img src="chub.png" alt="logo" className="mr-2 h-8 w-8"></img>
                 <span className="self-center whitespace-nowrap text-xl font-semibold text-white">
                   Circle
                   <span className="ms-1 rounded-md bg-orange-400 p-1 text-black">
